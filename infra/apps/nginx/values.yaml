@@ -1,0 +1,5 @@
+controller:
+  service:
+    type: LoadBalancer
+    loadBalancerIP: 172.20.0.170  # MetalLB static IP
+    externalTrafficPolicy: Local

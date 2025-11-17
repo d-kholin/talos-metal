@@ -13,7 +13,6 @@ talosconfig-*
 
 # Generated configs
 configs/
-*.yaml
 !terraform.tfvars.example
 
 bootstrap/tfplan

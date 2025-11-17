@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: default-valid-cert
+  namespace: default
+spec:
+  secretName: default-valid-cert-tls
+  issuerRef:
+    name: letsencrypt-dns01-issuer
+    kind: ClusterIssuer
+  commonName: thegriffiths.ca
+  dnsNames:
+  - '*.thegriffiths.ca'
+  - thegriffiths.ca
