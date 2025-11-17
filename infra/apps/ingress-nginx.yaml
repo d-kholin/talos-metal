@@ -16,7 +16,7 @@ spec:
         controller:
           service:
             type: LoadBalancer
-            loadBalancerIP: 172.18.0.50    # (optional) pin a static IP from pool
+            loadBalancerIP: 172.20.0.170    # (optional) pin a static IP from pool
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx
