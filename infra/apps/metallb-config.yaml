@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/d-kholin/talos-metal.git
     targetRevision: main
-    path: talos-dev/infra/metallb
+    path: infra/metallb
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system
