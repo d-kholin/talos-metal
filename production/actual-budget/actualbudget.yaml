@@ -1,0 +1,85 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: actual-budget
+  namespace: default
+  labels:
+    app: actual-budget
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: actual-budget
+  template:
+    metadata:
+      labels:
+        app: actual-budget
+    spec:
+      containers:
+      - name: actual-budget
+        image: docker.io/actualbudget/actual-server:25.7.1
+        ports:
+        - containerPort: 5006
+        volumeMounts:
+        - name: volv
+          mountPath: /data
+      volumes:
+      - name: volv
+        persistentVolumeClaim:
+          claimName: longhorn-actual-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: actual-budget
+  namespace: default
+  labels:
+    app: actual-budget
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 5006
+  selector:
+    app: actual-budget
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: actual-budget-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: numbers.thegriffiths.ca
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: actual-budget
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - numbers.thegriffiths.ca
+    secretName: default-valid-cert-tls
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: longhorn-actual-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 2Gi
