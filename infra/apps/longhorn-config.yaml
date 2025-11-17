@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/d-kholin/talos-metal.git
     targetRevision: main
-    path: infra/longhorn
+    path: infra/apps/longhorn
   destination:
     server: https://kubernetes.default.svc
     namespace: default

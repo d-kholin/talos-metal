@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/d-kholin/homelab.git
+    repoURL: https://github.com/d-kholin/talos-metal.git
     targetRevision: main
-    path: talos-dev/infra/namespaces
+    path: infra/apps/namespaces
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
