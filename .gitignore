@@ -17,3 +17,4 @@ configs/
 
 bootstrap/tfplan
 bootstrap/.talos/config
+argocd/cloudflare-secret.yaml
